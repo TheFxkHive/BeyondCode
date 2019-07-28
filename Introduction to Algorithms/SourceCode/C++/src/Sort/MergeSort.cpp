@@ -1,4 +1,5 @@
 #include "sort.h"
+#include "log.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -9,6 +10,7 @@ void Merge(int* arr, int* left, int left_len, int* right, int right_len)
     int idx = 0;
     int l_idx = 0;
     int r_idx = 0;
+
     while(idx < left_len + right_len)
     {
         if(l_idx == left_len)
@@ -16,7 +18,7 @@ void Merge(int* arr, int* left, int left_len, int* right, int right_len)
             memcpy(arr+idx, right, sizeof(int)*(right_len-r_idx));
             break;
         }
-        else if(r_idx = right_len)
+        else if(r_idx == right_len)
         {
             memcpy(arr+idx, left, sizeof(int)*(left_len-l_idx));
             break;
@@ -32,6 +34,7 @@ void Merge(int* arr, int* left, int left_len, int* right, int right_len)
             r_idx++;
         }
         idx ++;
+        Logger(arr, idx, 5);
     }
 }
 int * MergeSort(int *arr, int len)
@@ -45,11 +48,15 @@ int * MergeSort(int *arr, int len)
     int * left = (int*)malloc(sizeof(int) * (len - (len / 2)));
 
     assert(right&&left);
-    memcpy(right, arr + (len / 2), (len / 2) * sizeof(int));
+    Logger(arr, len, 5);
+    memcpy(right, arr + len - (len / 2), (len / 2) * sizeof(int));
     memcpy(left, arr, (len - (len / 2)) * sizeof(int));
-    MergeSort(arr + (len / 2), len / 2);//right
-    MergeSort(arr, len - (len / 2));//left
-    Merge(arr, left, len - (len / 2), right,len / 2);
+    Logger(left, (len - (len / 2)), 5);
+    Logger(right, (len / 2), 5);
+    MergeSort(right , len / 2);//right
+    MergeSort(left, len - (len / 2));//left
+    Merge(arr, left, len - (len / 2), right, len / 2);
     free(right);
     free(left);
+    return arr;
 }
