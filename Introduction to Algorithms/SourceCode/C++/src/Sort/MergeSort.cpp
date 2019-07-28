@@ -1,5 +1,7 @@
 #include "sort.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <assert.h>
 
 void Merge(int* arr, int* left, int left_len, int* right, int right_len)
@@ -11,12 +13,12 @@ void Merge(int* arr, int* left, int left_len, int* right, int right_len)
     {
         if(l_idx == left_len)
         {
-            memcpy(arr+index, right, sizeof(int)*(right_len-r_idx));
+            memcpy(arr+idx, right, sizeof(int)*(right_len-r_idx));
             break;
         }
         else if(r_idx = right_len)
         {
-            memcpy(arr+index, left, sizeof(int)*(left_len-l_idx));
+            memcpy(arr+idx, left, sizeof(int)*(left_len-l_idx));
             break;
         }
         if(left[l_idx] < right[r_idx])
@@ -47,5 +49,7 @@ int * MergeSort(int *arr, int len)
     memcpy(left, arr, (len - (len / 2)) * sizeof(int));
     MergeSort(arr + (len / 2), len / 2);//right
     MergeSort(arr, len - (len / 2));//left
-    Merge();
+    Merge(arr, left, len - (len / 2), right,len / 2);
+    free(right);
+    free(left);
 }
