@@ -1,4 +1,4 @@
-test:InsertSort.cpp MergeSort.cpp main.cpp ../Log/Log.cpp
+test:BubbleSort.cpp InsertSort.cpp MergeSort.cpp main.cpp ../Log/Log.cpp
 	g++ -o $@ $^ -I../../include
 .PHONY:clean
 clean:
