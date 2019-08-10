@@ -4,5 +4,6 @@
 int * InsertSort(int *arr, int len);
 int * MergeSort(int *arr, int len);
 int * BubbleSort(int *arr, int len);
+int * HeapSort(int *arr, int len);
 
 #endif
