@@ -9,5 +9,6 @@ int * HeapSort(int *arr, int len);
 int * QuickSort(int *arr, int len);
 int * StoogeSort(int *arr, int len);
 int * CountingSort(int *arr, int len);
+int * RadixSort(int *arr, int len);
 
 #endif
